@@ -1,0 +1,72 @@
+.legal-page { background: #fcfdff; font-family: 'Inter', sans-serif; }
+
+.legal-hero {
+    background: linear-gradient(135deg, #0f172a, #1B3C73);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.legal-badge {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.legal-hero h1 { font-size: 2.8rem; margin: 20px 0; }
+.legal-hero h1 span { color: #818cf8; }
+
+.legal-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.flex-layout { display: flex; gap: 50px; margin-top: -40px; }
+
+/* Sidebar Styling */
+.legal-sidebar { width: 280px; }
+.sidebar-inner {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-inner h3 { font-size: 1.1rem; color: #1e293b; margin-bottom: 20px; }
+
+.sidebar-inner button {
+    display: block; width: 100%; text-align: left;
+    background: none; border: none; padding: 12px 15px;
+    margin-bottom: 5px; border-radius: 10px; cursor: pointer;
+    color: #64748b; font-weight: 500; transition: 0.3s;
+}
+
+.sidebar-inner button.active {
+    background: #eef2ff; color: #4f46e5; font-weight: 700;
+}
+
+/* Content Styling */
+.legal-content { flex: 1; }
+.legal-card {
+    background: white; padding: 40px; border-radius: 24px;
+    margin-bottom: 30px; border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.legal-card h2 { color: #1B3C73; font-size: 2rem; margin-bottom: 30px; }
+.legal-block { margin-bottom: 25px; }
+.legal-block h3 { color: #334155; font-size: 1.2rem; margin-bottom: 10px; }
+.legal-block p { color: #64748b; line-height: 1.8; }
+
+.alert-box {
+    background: #fff8f8; border-left: 4px solid #818cf8; padding: 20px; border-radius: 12px;
+}
+
+.legal-footer { text-align: center; padding: 40px; color: #94a3b8; font-size: 0.9rem; }
+
+@media (max-width: 900px) {
+    .flex-layout { flex-direction: column; }
+    .legal-sidebar { width: 100%; }
+    .sidebar-inner { position: relative; top: 0; }
+}

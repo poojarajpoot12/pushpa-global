@@ -1,0 +1,165 @@
+/* MAIN WRAPPER */
+.faq-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 550px;
+  position: relative;
+  overflow: hidden; /* FIX */
+}
+
+/* LEFT IMAGE */
+.faq-left {
+  width: 50%;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 60px;
+}
+
+/* BLUE STRIP */
+.faq-strip {
+  width: 60px;
+  background: #2b6cb0;
+  clip-path: polygon(0 0, 100% 60px, 100% 100%, 0 calc(100% - 60px));
+  
+}
+
+/* RIGHT PANEL */
+.faq-right {
+  width: 50%;
+  background-image: url("../assets/faq-bg2-1.png");
+  color: #fff;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 60px;
+  position: relative;
+}
+
+/* TEXT */
+.faq-subtitle {
+  color: #c7d2fe;
+  margin-bottom: 10px;
+}
+
+.faq-right h2 {
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+.faq-h{
+  color: #fff;
+}
+
+/* FAQ BOX */
+.faq-box {
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-top: 20px;
+}
+
+/* ITEM */
+.faq-item {
+  background: #f3f3f3;
+  border-radius: 14px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+/* QUESTION */
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+/* ICON */
+.faq-question .icon {
+  transition: transform 0.3s;
+}
+
+.faq-item.active .icon {
+  transform: rotate(180deg);
+}
+
+/* ANSWER */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  color: #555;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.faq-answer.show {
+  max-height: 200px;
+  padding: 10px 20px 20px;
+}
+
+/* ACTIVE */
+.faq-item.active {
+  background: #dbeafe;
+}
+
+/* ✅ OVERLAY IMAGE (FIXED PROPERLY) */
+.overlay-img {
+  position: absolute;
+  top: 20%;
+  right: 20px; /* little inside instead of edge */
+  transform: translateY(-50%); /* ONLY Y movement */
+  width: 120px;
+  pointer-events: none;
+}
+
+/* ===================== */
+/* 📱 RESPONSIVE */
+@media (max-width: 992px) {
+  .faq-right {
+    padding: 40px 25px;
+  }
+
+  .faq-right h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq-wrapper {
+    flex-direction: column;
+  }
+
+  .faq-left {
+    width: 100%;
+    height: 250px;
+  }
+
+  .faq-strip {
+    width: 100%;
+    height: 6px;
+  }
+
+  .faq-right {
+    width: 100%;
+    padding: 30px 20px;
+    margin-top: 0;
+  }
+
+  .faq-box {
+    max-height: none;
+  }
+
+  .overlay-img {
+    display: none; /* mobile me hata diya safe ke liye */
+  }
+}
+
+/* ✅ GLOBAL FINAL FIX */
+html, body {
+  overflow-x: hidden;
+}

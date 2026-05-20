@@ -1,0 +1,301 @@
+/* --- VARIABLES --- */
+:root {
+  --nav-bg: #f8fafc;
+  --nav-text: #1e293b;
+  --dropdown-bg: #ffffff;
+  --primary-blue: #2563eb;
+  --hover-blue: #eff6ff;
+  --border-color: rgba(128, 128, 128, 0.15);
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* NAVBAR BASE */
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 40px;
+  transition: 0.3s ease;
+  z-index: 1000;
+  background-color: var(--nav-bg) !important;
+  display: flex;
+  align-items: center;
+  height: 80px;
+}
+
+.navbar.scrolled {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+
+.logo img {
+  cursor: pointer;
+}
+
+/* NAV LINKS (Desktop) */
+.nav-links {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  position: relative; /* This is key for dropdown alignment */
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--nav-text);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+.nav-links li:hover .nav-item-header {
+  color: var(--primary-blue);
+}
+
+/* MEGA DROPDOWN (Services) */
+.mega-dropdown {
+  position: absolute;
+  top: 100%; /* Sits exactly below the li */
+  left: 0;
+  display: flex;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  z-index: 1001;
+  overflow: hidden;
+  min-width: 260px;
+  margin-top: 5px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.mega-dropdown.expanded {
+  min-width: 580px;
+}
+
+.side-menu {
+  width: 260px;
+  padding: 10px 0;
+  background: #ffffff;
+}
+
+.side-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.side-item.active-sub {
+  color: var(--primary-blue);
+  background: var(--hover-blue);
+}
+
+.cat-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.content-menu {
+  flex: 1;
+  padding: 15px 20px;
+  background: #fcfcfc;
+  border-left: 1px solid #f1f5f9;
+}
+
+.content-menu p {
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.content-menu p:hover {
+  background: #ffffff;
+  color: var(--primary-blue);
+}
+
+/* STANDARD DROPDOWN (Study Abroad) */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  padding: 10px;
+  min-width: 200px;
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  margin-top: 5px;
+}
+
+/* ACTIONS */
+.nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  color: white !important;
+  border: none;
+  padding: 12px 25px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 50px;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  text-decoration: none;
+}
+
+/* HAMBURGER (Desktop par hide) */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--nav-text);
+  margin-left: 15px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- MOBILE RESPONSIVE (Merged & Optimized) --- */
+@media (max-width: 1024px) {
+  /* Navbar adjustments */
+  .navbar {
+    padding: 0 15px;
+    height: 80px; /* Thoda kam height mobile par clean lagta hai */
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  
+
+  /* Hamburger logic */
+  .hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--nav-text);
+    z-index: 1100; /* Sidebar ke upar dikhne ke liye */
+    margin-left: auto;
+    margin-right: 20px;
+    padding: 5px;
+  }
+
+  /* Hide default nav actions on small screens */
+  .nav-actions .btn {
+    display: none; 
+  }
+
+  /* Mobile Sidebar Menu */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+  }
+
+  .nav-links.open {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%; /* 360px par best balance deta hai */
+    max-width: 300px; /* Zyada bade tablets par menu bahut faila hua na lage */
+    height: 500px;
+    background: #ffffff;
+    padding: 80px 20px 20px 20px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 1050;
+    overflow-y: auto; /* Agar menu bada ho toh scroll ho sake */
+  }
+
+  .nav-links li {
+    width: 100%;
+    display: block;
+  }
+
+  .nav-item-header {
+    font-size: 14px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize; /* Mobile par clean readability ke liye */
+  }
+
+  /* Dropdowns and Mega Menus for Mobile */
+  .dropdown, 
+  .mega-dropdown, 
+  .mega-dropdown.expanded {
+    position: static;
+    display: block;
+    width: 100%;
+    min-width: 100%;
+    box-shadow: none;
+    border: none;
+    padding-left: 15px;
+    background: #f8fafc;
+    animation: none; /* Mobile par lag remove karne ke liye */
+  }
+
+  .side-menu, 
+  .content-menu {
+    width: 100%;
+    padding: 5px 0;
+    border: none;
+    background: transparent;
+  }
+
+  .side-item {
+    padding: 10px 0;
+  }
+
+  .content-menu p {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}

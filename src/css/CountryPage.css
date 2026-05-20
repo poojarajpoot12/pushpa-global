@@ -1,0 +1,920 @@
+:root {
+  /* Light Theme Colors */
+  --bg-color: #f8fafc;
+  --text-main: #1e293b;
+  --hero-overlay: rgba(10, 37, 64, 0.6);
+  
+  /* Constant Card Colors (Hamesha Light) */
+  --card-bg: #ffffff;
+  --card-text: #475569;
+  --card-title: #1e293b;
+  --card-border: #f1f5f9;
+  
+  /* Common Brand Colors */
+  --primary-blue: #3b82f6;
+  --accent-green: #2ecc71;
+  --text-gray: #4f566b;
+}
+
+/* 2. Dark Theme Overrides */
+/* Is class ko toggle karne par dark mode active hoga */
+[data-theme='dark'] {
+  --bg-color: #0f172a; /* Deep dark blue/black */
+  --text-main: #f8fafc;
+  --hero-overlay: rgba(0, 0, 0, 0.8);
+  
+  /* Note: Cards ke variables ko humne change nahi kiya taaki wo light hi rahein */
+}
+
+.landing-container {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color); /* Dynamic Background */
+  color: var(--text-main); /* Dynamic Text */
+  transition: background-color 0.3s ease;
+}
+
+/* Hero Section */
+.heroStudyAbroad {
+  background-size: cover;
+  background-position: center;
+  padding: 80px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  min-height: 500px;
+  /* Overlay for readability */
+  background-blend-mode: overlay;
+  background-color: var(--hero-overlay); 
+}
+.studyabroadheading{
+  color: #fff;
+}
+
+.hero h1 { font-size: 3.5rem; line-height: 1.1; color: #fff; }
+.hero h1 span { font-weight: 800; }
+.hero-subtitle { color: #fff; }
+
+.btn-primary {
+  background: none;
+  color: #fff;
+  border: 2px solid white;
+  padding: 16px 32px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: white;
+  color: var(--primary-blue);
+}
+
+.hero-image-card img {
+  width: 550px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+@media(max-width: 768px){
+  .hero-image-card img{
+    display: none;
+  }
+}
+
+/* Info Grid Styling - Background dynamic rahega */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 50px 8%;
+  background-color: var(--bg-color); 
+}
+
+/* Info Card - FIXED LIGHT THEME */
+.info-card {
+  background: var(--card-bg) !important; /* Hamesha White */
+  color: var(--card-text) !important;
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--card-border);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+}
+
+.info-card h3 {
+  font-size: 1.2rem;
+  color: var(--card-title) !important; /* Hamesha Dark Gray/Black */
+  margin-bottom: 5px;
+}
+
+.card-icon {
+  width: 45px;
+  height: 45px;
+  background: #eef2ff; /* Light blue tint hamesha */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card-sub {
+  color: var(--accent-green);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.card-list li {
+  font-size: 0.9rem;
+  color: var(--card-text) !important; /* Hamesha light gray text */
+  margin-bottom: 10px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.card-list li::before {
+  content: "•";
+  color: var(--primary-blue);
+  position: absolute;
+  left: 0;
+}
+
+.card-footer-msg {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px dashed #e2e8f0;
+  color: #15803d;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Animations */
+.info-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-blue);
+}
+
+.info-card:hover .card-icon {
+  transform: rotate(-5deg) scale(1.1);
+  background: #e0e7ff;
+}
+.cardheading{
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: var(--text-dark) !important;
+  margin-top: 5px !important;
+  margin-bottom: 2px !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+
+/* Naye 5-column grid ke liye configuration */
+.extra-info-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 0px 5% 60px 5%; /* Top padding 0 taaki grids chipke rahein */
+  background-color: var(--bg-color);
+}
+
+.extra-card {
+  align-items: center !important;
+  text-align: center !important;
+  padding: 25px 15px !important;
+}
+
+.circle-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.highlight-blue {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #5f6b93;
+  margin: 10px 0;
+}
+
+.check-list li::before {
+  content: "✓" !important;
+  color: #22c55e !important;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.center-footer {
+  text-align: center;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .extra-info-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .extra-info-grid { grid-template-columns: repeat(1, 1fr); }
+}
+.couselling-img{
+  border-radius: 50px;
+}
+.countrycta-container {
+  background: #0a2540;
+  border-radius: 30px;
+  padding: 50px 60px;
+  display: flex; /* Sirf 2 columns banayega: wrapper aur image-3d */
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  color: white;
+  overflow: hidden;
+}
+
+/* Naya Wrapper jo text elements ko vertical rakhega */
+.countrycta-text-wrapper {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column; /* Text elements ek ke niche ek aayenge */
+  align-items: flex-start; /* Sab kuch left align rahega */
+  text-align: left;
+}
+
+.countrycta-text-wrapper h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.countrycta-text-wrapper p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #cbd5e1;
+}
+
+.countrycta-image-3d {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.couselling-img {
+  width: 100%;
+  max-width: 450px;
+  height: 300px;
+  object-fit: cover; /* Image ko properly fit karega */
+  border-radius: 20px;
+  display: block; /* Ensure image is visible */
+}
+@media (max-width:768px){
+  .countrycta-image-3d img{
+    display: none;
+  }
+}
+
+/* Button stretch hone se rokne ke liye */
+.btn-counselling {
+  width: fit-content; 
+  background-color: #48bb78;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.faq-quick-section {
+  padding: 60px 8%;
+  background-color: transparent;
+}
+
+.faq-external-header {
+  display: flex;
+  flex-direction: column; /* Dot aur Text ko upar niche rakhne ke liye, ya sirf text ke liye display block use karein */
+  align-items: center;    /* Horizontal centering */
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 35px;
+  width: 100%;            /* Pura space lene ke liye */
+}
+
+/* Heading ki styling */
+.faq-external-header h2 {
+  font-size: 3rem;        /* Aapke requirement ke hisaab se 3rem */
+  font-weight: 400;       /* Light weight jaisa aapne pucha */
+  color: var(--text-color);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.faq-external-header h2 span {
+  font-weight: 300;
+  opacity: 0.7;
+}
+
+/* Ek Bada Card Layout */
+.faq-main-card {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Internal Grid: 2 questions per row (Total 3 rows for 6 questions) */
+.faq-grid-internal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 60px;
+  row-gap: 30px;
+}
+
+.faq-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.faq-question-side {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.q-bullet {
+  color: var(--primary-color);
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.q-text {
+  font-weight: 600;
+  color: #334155;
+  font-size: 1.05rem;
+}
+
+/* Answer Badges */
+.a-badge {
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 12px;
+}
+
+.is-yes {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #dcfce7;
+}
+
+.is-other {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .faq-grid-internal {
+    grid-template-columns: 1fr; /* Mobile par single column */
+    column-gap: 0;
+  }
+  .faq-main-card {
+    padding: 25px;
+  }
+  .faq-external-header h2 {
+    font-size: 1.5rem;
+  }
+}
+/* Card Container Grid */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: #f8fafc; /* Soft background to make white cards pop */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Base Card Styling */
+.info-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08);
+}
+
+/* Featured / Active Card (e.g., PR Pathway) */
+.info-card.active {
+  border-color: #6366f1; /* Premium Indigo border instead of harsh blue */
+  box-shadow: 0 0 0 1px #6366f1, 0 10px 15px -3px rgba(99, 102, 241, 0.15);
+}
+
+/* Icon Wrapper */
+.card-icon-wrapper {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  background-color: #f1f5f9; /* Standardize light background for all */
+  color: #475569;
+  transition: background-color 0.3s;
+}
+
+/* Subtle brand accent colors for specific icons on hover */
+.info-card:hover .card-icon-wrapper {
+  background-color: #eef2ff;
+  color: #4f46e5;
+}
+
+/* Typography Hierarchy */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.card-subtitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #10b981; /* Unified crisp green */
+  margin-bottom: 1rem;
+}
+
+/* Hero Text Highlight (e.g., "2-4 Years" or "Study -> Job -> PR") */
+.card-highlight {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1d4ed8; /* Soft blue */
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+/* Standardized List Layout */
+.card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left; /* Left-aligned for easier reading */
+}
+
+.card-list li {
+  font-size: 0.875rem;
+  color: #475569;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.4;
+}
+
+/* Custom Checkmarks to replace default double bullets */
+.card-list li::before {
+  content: "✓";
+  color: #10b981;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Clean standard list item (bullet style) */
+.card-list.bullets li::before {
+  content: "•";
+  color: #a5b4fc;
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+/* Footer Accent / Tag styling */
+.card-footer-tag {
+  margin-top: auto; /* Pushes to bottom */
+  padding-top: 1rem;
+  width: 100%;
+  border-top: 1px dashed #e2e8f0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #15803d; /* Grounded green */
+}
+/* ===========================================
+   4. Bottom Row Grid (Visa, Housing, etc.)
+   =========================================== */
+
+.bottom-row-grid {
+  margin-top: -20px; /* Grids ko chipkane ke liye */
+  padding-top: 0;
+}
+
+/* Individual Bottom Card */
+.bottom-card {
+  align-items: flex-start !important; /* Left aligned content */
+  text-align: left !important;
+  padding: 30px 20px !important;
+  justify-content: flex-start;
+}
+
+.bottom-card-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  color: var(--card-title);
+  width: 100%;
+}
+
+.card-icon-small {
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
+/* 1. Step Numbers Styling (Visa Process) */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-num {
+  background: #f1f5f9;
+  color: var(--primary-blue);
+  font-weight: 800;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.step-text {
+  font-size: 0.9rem;
+  color: var(--card-text);
+  font-weight: 500;
+}
+
+/* 2. Rent Box Styling */
+.rent-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 5px;
+  margin: 15px 0;
+  width: 100%;
+}
+
+.rent-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.rent-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* 3. Green Check List (Healthcare/Safety) */
+.check-list-green {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 20px 0;
+}
+
+.check-list-green li {
+  font-size: 0.9rem;
+  color: var(--card-text);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.check-list-green li::before {
+  content: "✓";
+  color: #22c55e;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+/* Inner Heading (e.g., "Healthcare:") */
+.inner-heading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  margin: 15px 0 8px 0;
+  text-transform: uppercase;
+}
+
+/* Bottom Footer Message */
+.bottom-footer-msg {
+  margin-top: auto; /* Pushes to bottom */
+  padding-top: 15px;
+  border-top: 1px dashed #e2e8f0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: 100%;
+  line-height: 1.4;
+}
+
+.card-sub-small {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+/* Responsive Grid fix for Bottom Row */
+@media (max-width: 1200px) {
+  .bottom-row-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .bottom-row-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Container Grids */
+.info-grid, .extra-info-grid, .bottom-row-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px; /* Gap kam kiya */
+  padding: 20px 5%;
+  align-items: stretch;
+}
+
+/* Base Card Styling */
+.info-card {
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  padding: 18px; /* Padding reduced from 25px+ */
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  border-color: #3b82f6;
+}
+
+/* Text Stylings */
+.info-card h3 {
+  font-size: 1.1rem;
+  margin: 12px 0 6px 0;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.card-sub {
+  font-size: 0.85rem;
+  color: #10b981;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.cardheading, .inner-heading {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+/* List Styling */
+.card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-list li {
+  font-size: 0.88rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Footer Message Fix */
+.card-footer-msg {
+  margin-top: auto; /* Push to bottom */
+  padding-top: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #059669;
+  border-top: 1px dashed #e2e8f0;
+}
+
+/* Highlight Box (Blue/Green) */
+.highlight-blue {
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Responsive Fix for small screens */
+@media (max-width: 600px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+}
+/* Job Section Company Buttons */
+.company-grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin-top: 8px;
+}
+
+.company-btn-item {
+  flex: 1 1 calc(50% - 8px); /* Ek row mein 2 button */
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 6px 10px !important;
+  border-radius: 8px;
+  font-size: 0.8rem !important;
+  font-weight: 600;
+  color: #475569 !important;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.company-btn-item:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #3b82f6 !important;
+  transform: translateY(-2px);
+}
+/* 1. Card Container Grid - Isse cards ek line mein 3 ya 4 aayenge */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 40px 5%;
+  background-color: #f8fafc;
+}
+
+/* 2. Base Card Styling - Exactly like image_f0faf8.png */
+.info-card {
+  background: #ffffff !important;
+  border-radius: 20px !important; /* Proper rounding */
+  padding: 25px !important;       /* Compact padding */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid #f1f5f9 !important;
+  display: flex;
+  flex-direction: column;
+  text-align: left !important; /* Sab kuch left align */
+  transition: all 0.3s ease;
+}
+
+/* Icon Box */
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Title & Subtitle */
+.info-card h3 {
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+  color: #1e293b !important;
+  margin: 0 0 5px 0 !important;
+}
+
+.card-sub {
+  color: #10b981 !important; /* Green Accent like Australia text */
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 20px !important;
+}
+
+/* Section Headings (Top Companies / Job Roles) */
+.cardheading {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: #64748b !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 15px 0 10px 0 !important;
+}
+
+/* 3. THE BUTTON GRID (Magic is here - 2 per row) */
+.company-grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.company-btn-item {
+  /* Exactly 50% width minus half of the gap */
+  flex: 0 0 calc(50% - 4px); 
+  background: #f1f5f9;
+  color: #475569 !important;
+  padding: 10px 4px !important;
+  border-radius: 10px;
+  font-size: 0.8rem !important;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+}
+
+/* List Item (Bullets removal for Job card) */
+.company-btn-item::before {
+  display: none !important; /* Extra dot hatane ke liye */
+}
+
+/* Standard List (Jo buttons nahi hain) */
+.card-list {
+  list-style: none;
+  padding: 0;
+}
+
+.card-list li {
+  font-size: 0.9rem;
+  color: #475569;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Footer Accent (The "Strong job market" box) */
+.card-footer-msg {
+  margin-top: auto; /* Bottom par lock karega */
+  padding-top: 20px;
+  color: #10b981;
+  font-weight: 700;
+  font-size: 0.85rem;
+}

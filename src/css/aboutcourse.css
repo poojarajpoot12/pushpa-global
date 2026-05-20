@@ -1,0 +1,418 @@
+/* --- GLOBAL WRAPPER --- */
+.about-page-main-wrapper {
+    overflow-x: hidden;
+    background-color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+.pgs-card-content-body-card{
+    overflow-x: hidden;
+    background-color: #fff;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+/* --- HERO BANNER --- */
+.about-banner {
+    height: 450px;
+    background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80') center/cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.about-subtitle{
+     background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), #0f172a);
+}
+
+.banner-content { 
+    text-align: center; 
+    z-index: 2;
+    padding: 0 20px;
+    margin-top: 150px;
+}
+
+.about-h { 
+    font-weight: 800; 
+    color: #fff; 
+    font-size: 50px;
+}
+.about-h span { color: #6366f1; }
+
+/* --- SHARED H2 STYLING --- */
+.about-page-main-wrapper h2 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem) !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    margin-bottom: 50px !important;
+    color: #1e293b !important;
+    text-transform: capitalize !important;
+}
+
+.about-page-main-wrapper h2 span { color: #6366f1 !important; }
+
+/* --- SECTION 2: GRID LAYOUT --- */
+.pgs-about-unique-wrapper { padding: 60px 5%; }
+.pgs-text-center-header { text-align: center; max-width: 800px; margin: 0 auto 50px; }
+
+.pgs-values-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.pgs-value-item-card {
+    background: #fff; border-radius: 12px; border: 1px solid #eef2f6;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden;
+}
+
+.pgs-card-top-accent { background: linear-gradient(135deg, #4f46e5, #8b5cf6); padding: 15px; color: #fff; text-align: center;}
+
+/* --- SECTION 3: PREMIUM CARDS --- */
+.pgs-value-section { padding: 80px 5%; background-color: #f8fafc; }
+
+.pgs-three-card-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pgs-premium-card {
+    background: #fff; border-radius: 20px; padding: 45px 20px 25px;
+    position: relative; border: 1px solid #f1f5f9; box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.pgs-icon-floating {
+    position: absolute; top: -25px; left: 20px;
+    width: 50px; height: 50px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* --- SECTION 4: TEAM SLIDER (Screenshot Style) --- */
+.pgs-team-section { padding: 80px 5%; background: #fff; }
+.pgs-team-card-v2 {
+    background: #fdfdfd; border-radius: 12px; overflow: hidden;
+    border: 1px solid #f1f5f9; text-align: center; height: 100%;
+}
+
+.pgs-card-banner {
+    background: linear-gradient(135deg, #6366f1, #a855f7); height: 120px;
+    position: relative; display: flex; justify-content: center; margin-bottom: 55px;
+}
+
+.pgs-member-img-circle {
+    position: absolute; bottom: -45px; width: 100px; height: 100px;
+    border-radius: 50%; border: 4px solid #fff; overflow: hidden;
+    background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.pgs-member-img-circle img { width: 100%; height: 100%; object-fit: cover; }
+.pgs-member-info { padding-bottom: 20px; }
+.pgs-member-pos { color: #6366f1; font-weight: 700; display: block; margin-top: 5px; font-size: 0.9rem;}
+
+/* --- SECTION 5: MISSION/VISION --- */
+.mv-section-padding { padding: 60px 5%; }
+.mv-flex-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.mv-card-modern { padding: 30px; background: #fff; border-radius: 20px; border: 1px solid #e2e8f0; text-align: center; }
+.mv-icon-box { width: 60px; height: 60px; background: #fee2e2; color: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.mv-icon-box.blue-bg { background: #e0e7ff; color: #4f46e5; }
+
+/* --- RESPONSIVE FIXES (PHONE) --- */
+@media (max-width: 900px) {
+    .pgs-three-card-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .pgs-three-card-row, 
+    .pgs-values-grid-layout, 
+    .mv-flex-grid { 
+        grid-template-columns: 1fr !important; /* Mobile par sab full width */
+    }
+    
+    .pgs-premium-card { margin-top: 30px; }
+    .about-banner { height: 250px; }
+    .pgs-team-section { padding: 60px 2%; }
+}
+/* --- STATS SECTION --- */
+.pgs-stats-section {
+    padding: 100px 5%;
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    position: relative;
+}
+
+.pgs-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Desktop pe 4 columns */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pgs-stat-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 35px 20px;
+    border-radius: 24px;
+    border: 1px solid #ffffff;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.05);
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pgs-stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.12);
+    border-color: #6366f1;
+}
+
+.pgs-stat-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
+}
+
+.pgs-stat-info h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0 0 5px 0;
+    letter-spacing: -1px;
+}
+
+.pgs-stat-info p {
+    font-size: 0.95rem;
+    color: #64748b;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* --- STATS RESPONSIVENESS --- */
+@media (max-width: 1024px) {
+    .pgs-stats-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tablets pe 2 columns */
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .pgs-stats-grid {
+        grid-template-columns: 1fr; /* Phones pe full width */
+    }
+    
+    .pgs-stat-card {
+        padding: 30px;
+    }
+
+    .pgs-stat-info h3 {
+        font-size: 1.8rem;
+    }
+}
+/* --- WHY CHOOSE SECTION --- */
+.pgs-why-choose-section {
+    padding: 100px 5%;
+    background-color: #ffffff;
+}
+
+.pgs-section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.pgs-section-header p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.pgs-why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Desktop pe 2 columns (cleaner look) */
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.pgs-why-card {
+    display: flex;
+    align-items: flex-start;
+    padding: 30px;
+    background: #f8faff;
+    border-radius: 20px;
+    border: 1px solid #eef2f6;
+    transition: all 0.3s ease;
+}
+
+.pgs-why-card:hover {
+    background: #ffffff;
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.08);
+    border-color: #6366f1;
+    transform: translateX(10px); /* Subtle slide effect */
+}
+
+.pgs-why-icon {
+    min-width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.pgs-why-content h4 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+}
+
+.pgs-why-content p {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 850px) {
+    .pgs-why-grid {
+        grid-template-columns: 1fr; /* Mobile aur Tablet pe single column */
+    }
+    
+    .pgs-why-card:hover {
+        transform: translateY(-5px); /* Mobile pe slide ki jagah upar uthega */
+    }
+}
+.pgs-new-approach-wrapper {
+    padding: 100px 5% !important;
+    background-color: #ffffff !important;
+}
+
+.pgs-approach-flex-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; /* Desktop pe 3 columns */
+    gap: 40px 30px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+.pgs-approach-step-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 20px !important;
+}
+
+/* Step Number Indicator */
+.pgs-step-indicator {
+    position: relative !important;
+    margin-bottom: 25px !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+.pgs-step-num {
+    width: 65px !important;
+    height: 65px !important;
+    background: linear-gradient(135deg, #6366f1, #a855f7) !important; /* Brand Blue/Purple */
+    color: white !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+    z-index: 2 !important;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2) !important;
+}
+
+/* Connector Line (Only for Desktop/Tablet) */
+.pgs-step-connector {
+    position: absolute !important;
+    top: 50% !important;
+    left: 60% !important;
+    width: 100% !important;
+    height: 2px !important;
+    background: #e2e8f0 !important;
+    z-index: 1 !important;
+}
+
+.pgs-approach-details h4 {
+    color: #1e293b !important;
+    font-size: 1.25rem !important;
+    margin-bottom: 12px !important;
+    font-weight: 700 !important;
+}
+
+.pgs-approach-details p {
+    color: #64748b !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+}
+
+/* --- RESPONSIVENESS --- */
+
+/* Tablet View (2 Columns) */
+@media (max-width: 1024px) {
+    .pgs-approach-flex-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .pgs-step-connector {
+        display: none !important; /* Connectors hide kar dete hain tablet/mobile pe clarity ke liye */
+    }
+}
+
+/* Mobile View (1 Column - Poori width phone par) */
+@media (max-width: 650px) {
+    .pgs-approach-flex-grid {
+        grid-template-columns: 1fr !important; /* Full width cards */
+        gap: 30px !important;
+    }
+    
+    .pgs-new-approach-wrapper {
+        padding: 60px 20px !important;
+    }
+
+    .pgs-approach-step-item {
+        background: #f8faff !important; /* Mobile pe card jaisa look dene ke liye light background */
+        border-radius: 15px !important;
+        padding: 30px 20px !important;
+        border: 1px solid #eef2f6 !important;
+    }
+    .about-h{
+        font-weight: 800; 
+        color: #fff; 
+        font-size: 50px;
+        margin-top: 0px;
+    }
+}

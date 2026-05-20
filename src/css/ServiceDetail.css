@@ -1,0 +1,199 @@
+.service-page-container {
+  font-family: 'Inter', sans-serif;
+  color: #1e293b;
+  margin-top: 80px;
+}
+
+/* SECTION 1: HERO */
+.sp-hero {
+  padding: 80px 5%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background: #fdfdfd;
+}
+
+.sp-hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sp-hero-image img {
+  width: 100%;
+  max-width: 550px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.sp-hero-content { flex: 1; }
+
+.sp-badge {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.sp-hero-content h1 { font-size: 48px; margin: 20px 0; color: #0f172a; }
+.sp-accent { color: #4caf50; }
+
+.sp-btn-group { display: flex; gap: 15px; margin: 30px 0; }
+.sp-btn-primary { background: #1e40af; color: white; padding:  25px; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; }
+.sp-btn-outline { border: 1px solid #4caf50; color: #4caf50; padding: 12px 25px; border-radius: 50px; background: none; cursor: pointer; transition: 0.3s; }
+.sp-btn-primary:hover { background: #15318a; }
+
+/* SECTION 2: OVERVIEW & CARDS */
+.sp-overview-box {
+  background: #f1f5f9;
+  padding: 40px;
+  border-radius: 15px;
+  margin: 0 5% 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.sp-offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px 5%;
+}
+
+.sp-offer-card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.sp-offer-card:hover { transform: translateY(-5px); }
+
+/* SECTION 3: THREE COLUMNS (BENEFITS) */
+.sp-benefit-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 60px 5%;
+}
+
+.sp-benefit-col { padding: 30px; border-radius: 15px; }
+.bg-green { background: #edf7ed; }
+.bg-blue { background: #edf2ff; }
+.bg-orange { background: #fff7ed; }
+
+/* SECTION 4: JOURNEY (Dark) */
+.sp-journey {
+  background: #0f2a4a; 
+  margin: 60px 5%;
+  padding: 60px;
+  border-radius: 30px;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  color: white;
+}
+
+.sp-journey-img-container { flex: 1; }
+.sp-journey-img-container img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.sp-journey-content-side { flex: 1.5; }
+.sp-journey-content-side h2 { font-size: 32px; margin-bottom: 15px; }
+.sp-journey-desc { font-size: 14px; opacity: 0.9; margin-bottom: 30px; }
+
+/* Journey Steps */
+.sp-steps-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.sp-step-item {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.sp-icon-circle {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+/* Arrows for Desktop */
+.sp-step-item:not(:last-child) .sp-icon-circle::after {
+  content: '→';
+  position: absolute;
+  right: -30%;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 20px;
+}
+
+.sp-step-num-title { font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+.sp-step-desc { font-size: 11px; line-height: 1.4; opacity: 0.7; }
+.sp-journey-footer { font-size: 13px; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+
+/* --- CONSOLIDATED RESPONSIVE QUERIES --- */
+
+@media (max-width: 1024px) {
+  .sp-hero, .sp-journey { flex-direction: column; text-align: center; padding: 40px 20px; }
+  .sp-hero-content h1 { font-size: 36px; }
+  .sp-journey-img-container { width: 100%; max-width: 500px; }
+}
+
+@media (max-width: 768px) {
+  /* Layout adjustments */
+  .sp-overview-box { flex-direction: column; text-align: center; }
+  .sp-overview-box button { width: 100%; max-width: 250px; }
+  
+  /* Grid adjustments */
+  .sp-offers-grid { grid-template-columns: 1fr; }
+  
+  /* Images adjustments */
+  .sp-hero-image img, .sp-journey-img-container img { height: 300px; }
+  
+  /* Steps Grid (Screenshot 2026-05-14 171124.png logic) */
+  .sp-steps-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 10px;
+  }
+  
+  .sp-step-item:not(:last-child) .sp-icon-circle::after { display: none; }
+  
+  h2 { font-size: 24px !important; margin: 30px 0 !important; }
+}
+.banafits{
+    color:#4caf50;
+}
+.banafit-cc{
+    color: #0d6efd;
+}
+.why-pgs{
+    color: #ffc107;
+}

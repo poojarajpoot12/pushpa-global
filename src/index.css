@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+/* --- GLOBAL THEME VARIABLES --- */
+:root {
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --accent-color: #3b82f6;
+  --timeline-line: #cbd5e1;
+  
+  /* --- FONT CONFIGURATION --- */
+  /* Aap yahan font name change kar sakte hain (e.g., 'Inter', 'Roboto', 'Montserrat') */
+  --body-font: 'Poppins', sans-serif; 
+}
+
+/* Is block ko deactivated rakha hai (Light mode fix) */
+[data-theme='dark'] {
+  --bg-color: #f8fafc; 
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+/* --- BASE RESET --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Sabhi elements par default font apply karne ke liye */
+  font-family: var(--body-font);
+}
+
+body {
+  background-color: var(--bg-color) !important;
+  color: var(--text-main) !important;
+  font-family: var(--body-font);
+  transition: none;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- HEADINGS --- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  font-family: var(--body-font);
+}
+
+/* --- PARAGRAPH SETTINGS (Aapki Requirement) --- */
+p {
+  font-family: var(--body-font); /* Font Family */
+  font-size: 16px;               /* Font Size */
+  line-height: 26px;             /* Line Height */
+  color: var(--text-muted);      /* Font Color */
+  margin: 0 0 18px 0;            /* Bottom Margin */
+}
+
+/* Other text elements */
+span, label, li {
+  color: var(--text-muted);
+  font-family: var(--body-font);
+}
+
+/* --- FORM ELEMENTS --- */
+input, select, textarea, button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffffff;
+  color: #1e293b;
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  outline: none;
+  font-family: var(--body-font); /* Form elements inherit nahi karte isliye yahan zaroori hai */
+}
+
+/* --- RESPONSIVE SETTINGS --- */
+@media (max-width: 768px) {
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  .section-wrapper { padding: 40px 15px; }
+}
