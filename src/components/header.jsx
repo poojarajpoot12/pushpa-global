@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "../css/header.css";
 import logo from "../assets/PUSHPA-FINAL-LOGO.png";
 import { useNavigate } from "react-router-dom";
-import { ChevronDown, ChevronRight, BookOpen, Users, Calendar } from "lucide-react";
+import { ChevronDown, ChevronRight, BookOpen, Users, Calendar, UniversityIcon, University } from "lucide-react";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -85,6 +85,27 @@ const Header = () => {
       ]
     },
     { label: "Courses" },
+    {
+      label: "Our Parnters",
+      isMultiLevel: true,
+      categories: [
+        {
+          name: "Domastic",
+          icon: <University size={16} />,
+          items: ["Career Counselling", "Student Counselling", "Study Abroad Guidance", "University Partnerships", "School Partnerships", "NIFT NID UCEED Coaching"]
+        },
+        {
+          name: "Abroad",
+          icon: <users size={16} />,
+          items: ["Teacher Recruitment", "IT Support Services", "Interactive Panels"]
+        },
+        {
+          name: "Events & Seminars",
+          icon: <Calendar size={16} />,
+          items: ["Career Fairs", "Workshops  Seminars", "Education Events"]
+        }
+      ]
+    },
     { label: "Blog" },
     { label: "Contact" },
   ];
