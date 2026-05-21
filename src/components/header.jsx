@@ -92,18 +92,52 @@ const Header = () => {
         {
           name: "Domastic",
           icon: <University size={16} />,
-          items: ["Career Counselling", "Student Counselling", "Study Abroad Guidance", "University Partnerships", "School Partnerships", "NIFT NID UCEED Coaching"]
+          items: ["Amity University", 
+"Lovely Professional University (LPU)", 
+"Chandigarh University", 
+"Manipal Academy of Higher Education (MAHE)", 
+"Vellore Institute of Technology (VIT)", 
+"SRM Institute of Science and Technology", 
+"Symbiosis International University", 
+"BITS Pilani", 
+"Ashoka University", 
+"OP Jindal Global University", 
+"Shiv Nadar University", 
+"KIIT University", 
+"Jain University", 
+"Bennett University", 
+"UPES Dehradun", 
+"Galgotias University", 
+"Noida International University", 
+"Parul University", 
+"SASTRA University", 
+"Kalinga Institute of Industrial Technology (KIIT)"]
         },
         {
           name: "Abroad",
-          icon: <users size={16} />,
-          items: ["Teacher Recruitment", "IT Support Services", "Interactive Panels"]
+          icon: <University size={16} />,
+          items: ["Harvard University", 
+"Massachusetts Institute of Technology (MIT)", 
+"Stanford University", 
+"University of Oxford", 
+"University of Cambridge", 
+"University of Toronto", 
+"University of Melbourne", 
+"University of Sydney", 
+"National University of Singapore (NUS)", 
+"Nanyang Technological University (NTU)", 
+"University of California, Berkeley", 
+"University of British Columbia (UBC)", 
+"Monash University", 
+"University of Auckland", 
+"University of Warwick", 
+"King's College London", 
+"University of Manchester", 
+"Arizona State University", 
+"Deakin University", 
+"Dublin City University"]
         },
-        {
-          name: "Events & Seminars",
-          icon: <Calendar size={16} />,
-          items: ["Career Fairs", "Workshops  Seminars", "Education Events"]
-        }
+       
       ]
     },
     { label: "Blog" },
