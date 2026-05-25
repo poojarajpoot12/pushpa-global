@@ -14,6 +14,7 @@ import Footer from "./components/footer.jsx";
 import ComparisonChart from "./components/ComparisonChart.jsx";
 import LegalPolicies from "./components/LegalPolicies.jsx";
 import ServiceDetail from "./components/ServiceDetail.jsx";
+import OurPartners from "./components/OurPartners.jsx";
 
 
 // ... baki imports
@@ -36,6 +37,7 @@ function App() {
           <Route path="/comparison-chart" element={<ComparisonChart/>}/>
           <Route path="legal-policies" element={<LegalPolicies/>}/>
           <Route path="/services/:serviceName" element={<ServiceDetail/>}/>
+          <Route path="/ourpartners" element={<OurPartners/>}/>
         </Routes>
       </main>
 

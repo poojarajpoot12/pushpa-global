@@ -3,6 +3,7 @@ import "../css/header.css";
 import logo from "../assets/PUSHPA-FINAL-LOGO.png";
 import { useNavigate } from "react-router-dom";
 import { ChevronDown, ChevronRight, BookOpen, Users, Calendar, UniversityIcon, University } from "lucide-react";
+import { label } from "framer-motion/client";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -38,6 +39,7 @@ const Header = () => {
         "Courses": "/courses",
         "Blog": "/blog",
         "Contact": "/register",
+        "Our Partner":"/ourpartners",
         "Register Now": "/register"
       };
       if (routes[label]) navigate(routes[label]);
@@ -85,61 +87,8 @@ const Header = () => {
       ]
     },
     { label: "Courses" },
-    {
-      label: "Our Parnters",
-      isMultiLevel: true,
-      categories: [
-        {
-          name: "Domastic",
-          icon: <University size={16} />,
-          items: ["Amity University", 
-"Lovely Professional University (LPU)", 
-"Chandigarh University", 
-"Manipal Academy of Higher Education (MAHE)", 
-"Vellore Institute of Technology (VIT)", 
-"SRM Institute of Science and Technology", 
-"Symbiosis International University", 
-"BITS Pilani", 
-"Ashoka University", 
-"OP Jindal Global University", 
-"Shiv Nadar University", 
-"KIIT University", 
-"Jain University", 
-"Bennett University", 
-"UPES Dehradun", 
-"Galgotias University", 
-"Noida International University", 
-"Parul University", 
-"SASTRA University", 
-"Kalinga Institute of Industrial Technology (KIIT)"]
-        },
-        {
-          name: "Abroad",
-          icon: <University size={16} />,
-          items: ["Harvard University", 
-"Massachusetts Institute of Technology (MIT)", 
-"Stanford University", 
-"University of Oxford", 
-"University of Cambridge", 
-"University of Toronto", 
-"University of Melbourne", 
-"University of Sydney", 
-"National University of Singapore (NUS)", 
-"Nanyang Technological University (NTU)", 
-"University of California, Berkeley", 
-"University of British Columbia (UBC)", 
-"Monash University", 
-"University of Auckland", 
-"University of Warwick", 
-"King's College London", 
-"University of Manchester", 
-"Arizona State University", 
-"Deakin University", 
-"Dublin City University"]
-        },
-       
-      ]
-    },
+    {label: "Our Partner"},
+   
     { label: "Blog" },
     { label: "Contact" },
   ];
