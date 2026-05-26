@@ -3,30 +3,30 @@ name: Deploy React Frontend to Hostinger
 on:
   push:
     branches:
-      - main  # Jab aap main branch par push karogi tabhi chalega
+      - main
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy Frontend
+    name: Deploy Frontend
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
+    - name: Get latest code
       uses: actions/checkout@v3
 
-    - name: ⚙️ Use Node.js
+    - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18' # <--- Yahan sirf node-version hona chahiye
+        node-version: '18'
 
-    - name: 📦 Install dependencies
+    - name: Install dependencies
       run: npm install
 
-    - name: 🏗️ Build Project
+    - name: Build Project
       run: npm run build
       env:
         CI: false
 
-    - name: 🚀 Sync Files to Hostinger via FTP
+    - name: Sync Files to Hostinger via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
