@@ -70,12 +70,12 @@ const Header = () => {
       isMultiLevel: true,
       categories: [
         {
-          name: "Career Counselling",
+          name: "Counselling & Partnership",
           icon: <BookOpen size={16} />,
           items: ["Career Counselling", "Student Counselling", "Study Abroad Guidance", "University Partnerships", "School Partnerships", "NIFT NID UCEED Coaching"]
         },
         {
-          name: "Teacher Recruitment",
+          name: "School Support",
           icon: <Users size={16} />,
           items: ["Teacher Recruitment", "IT Support Services", "Interactive Panels"]
         },
