@@ -3,7 +3,7 @@ name: Deploy Frontend and Backend to Hostinger
 on:
   push:
     branches:
-      - main  # Agar aapki branch ka naam master hai, toh yahan master likhein
+      - main  # Agar aapki branch master hai, toh master likhein
 
 jobs:
   deploy:
@@ -12,14 +12,25 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
 
+      - name: 🛠️ Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install Frontend Deps & Build
+        run: |
+          cd frontend
+          npm install
+          npm run build  # Yeh line automatic 'build' folder generate karegi
+
       - name: 🌐 Deploy Frontend Files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: frontend/build/  # Agar React Vite hai toh dist, agar CRA hai toh build/ likhein
-          server-dir: public_html/  # Frontend hostinger ke main folder me jayega
+          local-dir: frontend/build/  # Agar build ke baad 'dist' banta hai toh 'frontend/dist/' likhein
+          server-dir: public_html/
 
       - name: ⚙️ Deploy Backend Files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -27,8 +38,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: backend/       # Humara local backend folder
-          server-dir: backend/      # Hostinger ke andar 'backend' naam ka folder
+          local-dir: backend/
+          server-dir: backend/
           exclude: |
             **/node_modules/**
             **/.git/**
