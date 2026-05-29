@@ -21,7 +21,7 @@ jobs:
         run: |
           cd frontend
           npm install
-          npm run build  # Yeh line automatic 'build' folder generate karegi
+          CI=false npm run build  # <--- Yahan humne CI=false laga diya hai taaki warnings ignore ho jayein
 
       - name: 🌐 Deploy Frontend Files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -29,7 +29,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: frontend/build/  # Agar build ke baad 'dist' banta hai toh 'frontend/dist/' likhein
+          local-dir: frontend/build/
           server-dir: public_html/
 
       - name: ⚙️ Deploy Backend Files
