@@ -1,22 +1,14 @@
-// ==========================================
-// 1. DOTENV CONFIGURATION (SABSE UPBAR HONA CHAHIYE)
-// ==========================================
-require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors"); // Frontend connectivity ke liye zaroori hai
 const connectDaseBase = require("./config/db.js");
 
+// dotenv configuration (Hamesha DB connect hone se pehle load hona chahiye)
+require("dotenv").config();
+
 const app = express();
 
-// Debugging ke liye check kar rahe hain ki variables load huye ya nahi
-console.log("--- HOSTINGER ENVIRONMENT CHECK ---");
-console.log("PORT from Environment:", process.env.PORT);
-console.log("MONGO_URI Loaded:", process.env.MONGO_URI ? "YES (Sahi hai)" : "NO (Khaali hai)");
-console.log("----------------------------------");
-
 // ==========================================
-// 2. MIDDLEWARES
+// MIDDLEWARES
 // ==========================================
 app.use(cors()); // CORS enable kiya taaki React se API hit ho sake
 app.use(express.json()); // Body parser JSON data ke liye
@@ -27,13 +19,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// ==========================================
-// 3. DATABASE CONNECTION
-// ==========================================
+// DB Connection
 connectDaseBase();
 
 // ==========================================
-// 4. ROUTES
+// ROUTES
 // ==========================================
 // Test Route (Aapne check karne ke liye banaya tha)
 app.get("/api/test", (req, res) => {
@@ -45,10 +35,10 @@ const userRoutes = require("./routes/userRoutes");
 app.use("/api", userRoutes);
 
 // ==========================================
-// 5. ERROR HANDLERS (Hamesha end mein aate hain)
+// ERROR HANDLERS (Hamesha end mein aate hain)
 // ==========================================
 
-// 404 Route Not Found Handler
+// 1. 404 Route Not Found Handler
 app.use((req, res, next) => {
   res.status(404).json({ 
     success: false, 
@@ -56,7 +46,7 @@ app.use((req, res, next) => {
   });
 });
 
-// Global Internal Server Error Handler (Server crash hone se bachane ke liye)
+// 2. Global Internal Server Error Handler (Server crash hone se bachane ke liye)
 app.use((err, req, res, next) => {
   console.error("SERVER_ERROR 💥:", err.stack);
   res.status(500).json({
@@ -66,10 +56,9 @@ app.use((err, req, res, next) => {
 });
 
 // ==========================================
-// 6. SERVER START
+// SERVER START
 // ==========================================
-// Hostinger dynamic port assign karta hai, isiliye process.env.PORT zaroori hai
-const PORT = process.env.PORT || 5000; 
+const PORT = process.env.PORT || 5000; // .env se port uthayega, nahi to default 5000
 
 app.listen(PORT, () => {
   console.log(`🚀 Server fully operational on port ${PORT}`);

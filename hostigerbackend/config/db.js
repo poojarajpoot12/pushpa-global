@@ -3,22 +3,14 @@ const mongoose = require("mongoose");
 const connectDaseBase = async () => {
   try {
     const dbURI = process.env.MONGO_URI;
-    
-    if (!dbURI) {
-      console.error("❌ CRITICAL ERROR: process.env.MONGO_URI is undefined! Check Hostinger Variables.");
-      return;
-    }
-
     console.log("Connecting to MongoDB Atlas (Direct Mode)...");
 
-    // Mongoose connection
     await mongoose.connect(dbURI);
     
     console.log("🚀 MongoDB Connected Successfully!");
   } catch (err) {
     console.error("❌ DB Connection Error Detail:", err);
-    // Server ko crash loop se bachane ke liye process.exit(1) hata diya hai
-    // Taaki server chalu rahe aur hume real-error dikhta rahe
+    process.exit(1);
   }
 }
 
