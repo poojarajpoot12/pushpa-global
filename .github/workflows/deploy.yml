@@ -1,36 +1,36 @@
-name: Deploy React Frontend to Hostinger
+name: Deploy Frontend and Backend to Hostinger
 
 on:
   push:
     branches:
-      - main
+      - main  # Agar aapki branch ka naam master hai, toh yahan master likhein
 
 jobs:
-  web-deploy:
-    name: Deploy Frontend
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v3
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: 🌐 Deploy Frontend Files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: frontend/build/  # Agar React Vite hai toh dist, agar CRA hai toh build/ likhein
+          server-dir: public_html/  # Frontend hostinger ke main folder me jayega
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Project
-      run: npm run build
-      env:
-        CI: false
-
-    - name: Sync Files to Hostinger via FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./build/
-        server-dir: ./public_html/
+      - name: ⚙️ Deploy Backend Files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: backend/       # Humara local backend folder
+          server-dir: backend/      # Hostinger ke andar 'backend' naam ka folder
+          exclude: |
+            **/node_modules/**
+            **/.git/**
+            **/.github/**
+            .env
