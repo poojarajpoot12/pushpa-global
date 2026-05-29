@@ -3,14 +3,17 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { google } = require("googleapis");
 
-// Google Sheets Config Setup
+// ⚠️ APNI SPREADSHEET ID YAHAAN CHECK KARIYE
 const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID || "YOUR_SPREADSHEET_ID_HERE";
 
 async function appendToGoogleSheet(userData) {
   try {
-    // Service Account Credentials Authenticate karein
+    // 1. Debug: Check if function is calling
+    console.log("=== GOOGLE SHEET ATTEMPT START ===");
+    console.log("Received Role for Sheet:", userData.role);
+
     const auth = new google.auth.GoogleAuth({
-      keyFile: "credentials.json", 
+      keyFile: "credentials.json", // ⚠️ CHECK: Kya ye file aapke backend ke root folder mein isi naam se hai?
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 
@@ -21,104 +24,132 @@ async function appendToGoogleSheet(userData) {
     const timestamp = new Date().toLocaleString();
 
     const formattedRole = userData.role ? userData.role.toLowerCase().trim() : "student";
-    const messageStr = userData.message || "";
-    const sFields = userData.dynamicProfile?.studentFields || {};
+    let messageStr = userData.message || "";
+    
+    const dProfile = userData.dynamicProfile || {};
+    const sFields = dProfile.studentFields || {};
+    const pFields = dProfile.principalFields || {};
+    const tFields = dProfile.teacherFields || {};
+    const cFields = dProfile.counsellorFields || {};
+    const coFields = dProfile.coachingFields || {};
+    
+    let schoolName = "N/A";
+    let board = "N/A";
+    let totalStudents = "N/A";
+    let subject = "N/A";
+    let experience = "N/A";
+    let qualification = "N/A";
+    let course = "N/A";
+    let country = "N/A";
+    let budget = "N/A";
 
-    // 🔥 NAYAA LOGIC: Message string ke prefix check se Google Sheet ka Tab set karna
+    if (formattedRole === "student") {
+      qualification = sFields.currentQualification || "N/A";
+      course = sFields.interestedCourse || "N/A";
+      country = sFields.preferredCountry || "India";
+      budget = sFields.budgetRange || "N/A";
+    } 
+    else if (formattedRole === "principal") {
+      schoolName = pFields.schoolName || "N/A";
+      board = pFields.board || "N/A";
+      totalStudents = pFields.totalStudents || "N/A";
+    } 
+    else if (formattedRole === "teacher") {
+      schoolName = tFields.currentOrganization || "N/A";
+      subject = tFields.subjectTaught || "N/A";
+      experience = tFields.yearsOfExperience || "N/A";
+    } 
+    else if (formattedRole === "career counselling" || formattedRole === "counsellor") {
+      schoolName = cFields.organizationName || "N/A";
+      experience = cFields.yearsOfExperience || "N/A";
+      if(cFields.studentVolumeMonthly) {
+         messageStr = `[Monthly Volume: ${cFields.studentVolumeMonthly}] ${messageStr}`;
+      }
+    }
+    else if (formattedRole === "coaching partner" || formattedRole === "coaching") {
+      schoolName = coFields.instituteName || "N/A";
+      course = coFields.coursesOffered || "N/A";
+      totalStudents = coFields.numberOfStudents || "N/A";
+    }
+
+    // TAB MANAGEMENT
     if (messageStr.includes("WEBSITE CHATBOT")) {
-      // 1. Chatbot Leads Tab
       tabName = "Chatbot Leads";
       rowValues = [
-        timestamp,
-        userData.fullName,
-        userData.phoneNumber,
-        userData.email || "N/A",
-        userData.city || "N/A",
-        sFields.currentQualification || "N/A",
-        sFields.preferredCountry || "N/A",
-        messageStr // Isme budget aur full source text save rahega
+        timestamp, userData.fullName, userData.phoneNumber, userData.email || "N/A",
+        userData.city || "N/A", qualification, country, messageStr
       ];
-    } else if (messageStr.includes("CAREER COUNSELLING FORM")) {
-      // 2. Career Counselling Form Leads Tab
+    } 
+    else if (messageStr.includes("CAREER COUNSELLING FORM") || formattedRole === "student") {
       tabName = "Career Counselling Leads";
       rowValues = [
-        timestamp,
-        userData.fullName,
-        userData.phoneNumber,
-        userData.email,
-        userData.city,
-        userData.state || "N/A",
-        sFields.currentQualification || "N/A",
-        sFields.interestedCourse || "N/A",
-        sFields.preferredCountry || "India",
-        sFields.budgetRange || "N/A",
-        sFields.studyTimeline || "N/A",
-        messageStr // Isme board, score, parent details aur additional notes sab milenge
+        timestamp, userData.fullName, userData.phoneNumber, userData.email, userData.city || "N/A", userData.state || "N/A",
+        qualification, course, country, budget, sFields.studyTimeline || "N/A", messageStr || "N/A"
       ];
-    } else {
-      // 3. Register Form se aane wale baki saare doosre roles (Principal, Teacher, Partner etc.)
+    } 
+    else {
       tabName = "Quick Register Leads";
       rowValues = [
-        timestamp,
-        userData.fullName,
-        userData.phoneNumber,
-        userData.email,
-        formattedRole, // Yahan unka actual selected role (principal, teacher, etc.) show hoga
-        userData.city || "N/A",
-        userData.state || "N/A",
-        messageStr || "N/A"
+        timestamp, userData.fullName, userData.phoneNumber, userData.email, formattedRole,
+        userData.city || "N/A", userData.state || "N/A", schoolName, board, totalStudents, subject, experience, messageStr || "N/A"
       ];
     }
 
-    // Google Sheets API to append row
-    await sheets.spreadsheets.values.append({
+    // 2. Debug: See what Tab and Row are being sent
+    console.log("Target Tab Name:", `"${tabName}"`);
+    console.log("Row Values to Append:", rowValues);
+
+    const response = await sheets.spreadsheets.values.append({
       spreadsheetId: GOOGLE_SHEET_ID,
       range: `${tabName}!A:A`, 
       valueInputOption: "USER_ENTERED",
       resource: { values: [rowValues] },
     });
 
-    console.log(`Lead successfully added to Google Sheet tab: ${tabName}`);
+    console.log("✅ Google API Response Status:", response.status);
+    console.log(`🚀 Successfully Added to Google Sheet: ${tabName}`);
+    console.log("=== GOOGLE SHEET ATTEMPT END ===");
   } catch (sheetError) {
-    console.error("Google Sheet Append Error:", sheetError);
+    console.error("❌❌ GOOGLE SHEET ERROR DETAILS ❌❌");
+    console.error("Message:", sheetError.message);
+    if (sheetError.response) {
+      console.error("API Response Data:", sheetError.response.data);
+    }
+    console.error("=====================================");
   }
 }
 
-// ==========================================
 // SIGNUP CONTROLLER
-// ==========================================
 exports.signup = async (req, res) => {
   try {
-    const { 
-      fullName, 
-      email, 
-      phoneNumber, 
-      city, 
-      state, 
-      role, 
-      password, 
-      dynamicProfile, 
-      message 
-    } = req.body;
+    const { fullName, email, phoneNumber, city, state, role, password, message } = req.body;
+    let { dynamicProfile } = req.body;
 
-    // 1. Validation check
     if (!fullName || !email || !phoneNumber || !role || !password) {
       return res.status(400).json({ msg: "Please fill all required common fields" });
     }
 
-    // 2. Check if user already exists
     const existUser = await User.findOne({ email: email.toLowerCase() });
-    if (existUser) {
-      return res.status(400).json({ message: "User is already registered" });
-    }
+    if (existUser) return res.status(400).json({ message: "User is already registered" });
 
-    // 3. Hash Password
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // 4. Role format handle karna
     const formattedRole = role.toLowerCase().trim(); 
 
-    // 5. Create User in Database
+    // Raw payload ki deep copy Google sheet ke liye bhej rahe hain
+    const sheetPayload = JSON.parse(JSON.stringify(req.body));
+    
+    // Fire and forget calling (await nahi laga rahe taaki user signup na atke)
+    appendToGoogleSheet(sheetPayload);
+
+    // Compass cleanup
+    if (dynamicProfile) {
+      if (formattedRole !== "student") delete dynamicProfile.studentFields;
+      if (formattedRole !== "principal") delete dynamicProfile.principalFields;
+      if (formattedRole !== "teacher") delete dynamicProfile.teacherFields;
+      if (formattedRole !== "career counselling" && formattedRole !== "counsellor") delete dynamicProfile.counsellorFields;
+      if (formattedRole !== "coaching partner" && formattedRole !== "coaching") delete dynamicProfile.coachingFields;
+    }
+
     const user = await User.create({
       fullName,
       email: email.toLowerCase(),
@@ -132,61 +163,32 @@ exports.signup = async (req, res) => {
       uploadedDocumentUrl: req.file ? req.file.path : "" 
     });
 
-    // 🔥 6. Google Sheet Trigger (Hume req.body bhejni hai jisme dynamic message aur flags hain)
-    await appendToGoogleSheet(req.body);
-
-    // 7. Success Response
-    res.status(201).json({
+    return res.status(201).json({
       message: "User Registered Successfully",
-      user: {
-        _id: user._id,
-        fullName: user.fullName,
-        email: user.email,
-        role: user.role
-      }
+      user: { _id: user._id, fullName: user.fullName, email: user.email, role: user.role }
     });
 
   } catch (error) {
     console.error("Signup Error:", error);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
-// ==========================================
-// LOGIN CONTROLLER (Bina badlao ke)
-// ==========================================
+// LOGIN CONTROLLER
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({ msg: "Please provide email and password" });
-    }
+    if (!email || !password) return res.status(400).json({ msg: "Please provide email and password" });
 
     const user = await User.findOne({ email: email.toLowerCase() });
-    if (!user) {
-      return res.status(404).json({ msg: "User not found" });
-    }
+    if (!user) return res.status(404).json({ msg: "User not found" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ msg: "Wrong password" });
-    }
+    if (!isMatch) return res.status(400).json({ msg: "Wrong password" });
 
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET || "secretkey",
-      { expiresIn: "1d" }
-    );
-
-    res.status(200).json({ 
-      token, 
-      role: user.role,
-      fullName: user.fullName 
-    });
-
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET || "secretkey", { expiresIn: "1d" });
+    return res.status(200).json({ token, role: user.role, fullName: user.fullName });
   } catch (error) {
-    console.error("Login Error:", error);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
-}; 
+};

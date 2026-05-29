@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UserPlus2, User, Mail, Phone, Building2, MapPin, ShieldCheck, FileText } from "lucide-react";
+import { UserPlus2, User, Mail, Phone, Building2, MapPin, ShieldCheck } from "lucide-react";
 import "../css/popularCTA.css";
 import axios from "axios";
 
@@ -8,22 +8,23 @@ const PopularCTA = () => {
   const [formData, setFormData] = useState({
     fullName: "", 
     email: "", 
-    phoneNumber: "", // Changed from phone to phoneNumber to match backend
+    phoneNumber: "", 
     city: "", 
     state: "", 
     message: "",
-    password: "DefaultPassword123" // 🔥 Backend requires a password for user model hashing
+    password: "DefaultPassword123" 
   });
 
-  // Dynamic Profile state to match backend sub-document structure
-  const [dynamicProfile, setDynamicProfile] = useState({
+  // Initial Clean State Structure
+  const initialDynamicProfile = {
     studentFields: { currentQualification: "", interestedCourse: "", preferredCountry: "", budgetRange: "", studyTimeline: "" },
     principalFields: { schoolName: "", board: "", totalStudents: 0 },
     teacherFields: { currentOrganization: "", subjectTaught: "", yearsOfExperience: "", preferredLocation: "" },
     counsellorFields: { organizationName: "", yearsOfExperience: "", studentVolumeMonthly: 0 },
     coachingFields: { instituteName: "", coursesOffered: "", numberOfStudents: 0 }
-  });
+  };
 
+  const [dynamicProfile, setDynamicProfile] = useState(initialDynamicProfile);
   const [loading, setLoading] = useState(false);
   const [statusMsg, setStatusMsg] = useState("");
 
@@ -31,36 +32,22 @@ const PopularCTA = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // 🔥 FIXED: Ab role badalte hi baki saare fields state se strictly saaf ho jayenge!
   const handleRoleChange = (e) => {
     const selectedRole = e.target.value;
-  setRole(selectedRole);
+    setRole(selectedRole);
 
-  // 🔥 FIX: Role badalte hi memory mein se saare dynamic fields ko clear kar do
-  setFormData((prev) => ({
-    ...prev,
-    // Student fields zero karo
-    currentQualification: "0",
-    interestedCourse: "0",
-    preferredCountry: "0",
-    budgetRange: "0",
-    studyTimeline: "0",
+    const formattedRole = selectedRole.toLowerCase().trim();
     
-    // Principal fields zero karo
-    schoolName: "0",
-    board: "0",
-    totalStudents: "0",
-    
-    // Teacher fields zero karo
-    currentSchool: "0",
-    subjectTaught: "0",
-    experience: "0",
-    preferredLocation: "0",
-    
-    // Baki fields bhi isi tarah zero kar sakte ho...
-  }));
+    setDynamicProfile({
+      studentFields: formattedRole === "student" ? initialDynamicProfile.studentFields : { currentQualification: "", interestedCourse: "", preferredCountry: "", budgetRange: "", studyTimeline: "" },
+      principalFields: formattedRole === "principal" ? initialDynamicProfile.principalFields : { schoolName: "", board: "", totalStudents: "" },
+      teacherFields: formattedRole === "teacher" ? initialDynamicProfile.teacherFields : { currentOrganization: "", subjectTaught: "", yearsOfExperience: "", preferredLocation: "" },
+      counsellorFields: (formattedRole === "career counselling" || formattedRole === "counsellor") ? initialDynamicProfile.counsellorFields : { organizationName: "", yearsOfExperience: "", studentVolumeMonthly: "" },
+      coachingFields: (formattedRole === "coaching partner" || formattedRole === "coaching") ? initialDynamicProfile.coachingFields : { instituteName: "", coursesOffered: "", numberOfStudents: "" }
+    });
   };
 
-  // Dynamic profile handling helper
   const handleDynamicChange = (section, field, value) => {
     setDynamicProfile({
       ...dynamicProfile,
@@ -77,12 +64,10 @@ const PopularCTA = () => {
       setStatusMsg("Please select a role first.");
       return;
     }
-    setLoading(false);
     setLoading(true);
     setStatusMsg("");
 
     try {
-      // Sending exact clean payload matching our user schema
       const response = await axios.post("http://localhost:5000/api/signup", {
         role,
         ...formData,
@@ -93,6 +78,7 @@ const PopularCTA = () => {
         setStatusMsg("Success! Registered Successfully.");
         setRole("");
         setFormData({ fullName: "", email: "", phoneNumber: "", city: "", state: "", message: "", password: "DefaultPassword123" });
+        setDynamicProfile(initialDynamicProfile);
       }
     } catch (error) {
       console.error("Submission Error:", error.response?.data || error.message);
@@ -135,14 +121,14 @@ const PopularCTA = () => {
               <div className="icon-box blue">🏛️</div>
               <div className="feature-text">
                 <strong>University Admission Support</strong>
-                <span>End to end application assistance</span>
+                <span>End-to-end application assistance</span>
               </div>
             </div>
             <div className="feature-item">
-              <div className="icon-box blue">📆</div>
+              <div className="icon-box blue">📅</div>
               <div className="feature-text">
                 <strong>Workshops & Events</strong>
-                <span>Stay updated and ahead of the curve</span>
+                <span>Stay Updated and ahead of the curve</span>
               </div>
             </div>
           </div>
@@ -157,7 +143,6 @@ const PopularCTA = () => {
         </div>
 
         {/* RIGHT FORM CARD */}
-        {/* 🔥 FIX 1: Wrap inputs in a <form> tag with onSubmit handler */}
         <form onSubmit={handleSubmit} className="cta-form-card">
           <div className="form-header">
             <div className="user-circle">
@@ -194,7 +179,6 @@ const PopularCTA = () => {
 
             <div className="input-group">
               <Phone className="field-icon" size={18} />
-              {/* 🔥 FIX 2: Fixed field mapping name from 'phone' to 'phoneNumber' */}
               <input type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} placeholder="Phone Number" required />
             </div>
             
@@ -275,7 +259,6 @@ const PopularCTA = () => {
               <textarea className="form-textarea" name="message" value={formData.message} onChange={handleInputChange} placeholder="Message / Requirement"></textarea>
             </div>
 
-            {/* 🔥 FIX 3: Button type="submit" automatic form trigger handle karega */}
             <button type="submit" className="submit-btn" disabled={loading}>
               {loading ? "Registering..." : "Register Now →"}
             </button>
