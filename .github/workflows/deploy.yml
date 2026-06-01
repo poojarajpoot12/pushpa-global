@@ -21,7 +21,7 @@ jobs:
         run: |
           cd frontend
           npm install
-          CI=false npm run build  # <--- Yahan humne CI=false laga diya hai taaki warnings ignore ho jayein
+          CI=false npm run build  # Warnings ignore karne ke liye
 
       - name: 🌐 Deploy Frontend Files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -39,7 +39,8 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: backend/
-          server-dir: backend/
+          # 👇 YAHAN BADLAV KIYA HAI: Hostinger ke exact folder ka naam diya hai
+          server-dir: hostigerbackend/ 
           exclude: |
             **/node_modules/**
             **/.git/**
