@@ -1,5 +1,5 @@
 // ==========================================
-// 1. DOTENV CONFIGURATION (SABSE UPBAR HONA CHAHIYE)
+// 1. DOTENV CONFIGURATION (SABSE UPAR HONA CHAHIYE)
 // ==========================================
 require("dotenv").config();
 
@@ -11,7 +11,8 @@ const app = express();
 
 // Debugging ke liye check kar rahe hain ki variables load huye ya nahi
 console.log("--- HOSTINGER ENVIRONMENT CHECK ---");
-console.log("PORT from Environment:", process.env.PORT);
+console.log("PORT from Environment (Standard):", process.env.PORT);
+console.log("PORT from Environment (App Port):", process.env.APP_PORT);
 console.log("MONGO_URI Loaded:", process.env.MONGO_URI ? "YES (Sahi hai)" : "NO (Khaali hai)");
 console.log("----------------------------------");
 
@@ -27,10 +28,8 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 // ==========================================
-// 4. ROUTES
+// 3. ROUTES
 // ==========================================
 // Test Route (Aapne check karne ke liye banaya tha)
 app.get("/api/test", (req, res) => {
@@ -42,7 +41,7 @@ const userRoutes = require("./routes/userRoutes");
 app.use("/api", userRoutes);
 
 // ==========================================
-// 5. ERROR HANDLERS (Hamesha end mein aate hain)
+// 4. ERROR HANDLERS (Hamesha end mein aate hain)
 // ==========================================
 
 // 404 Route Not Found Handler
@@ -63,13 +62,19 @@ app.use((err, req, res, next) => {
 });
 
 // ==========================================
-// 6. SERVER START
-const PORT = process.env.PORT || process.env.port || 3000; 
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server fully operational on port ${PORT}`);
-  // ==========================================
-// 3. DATABASE CONNECTION
+// 5. SERVER START (UPDATED FOR HOSTINGER)
 // ==========================================
-connectDaseBase();
+// Hostinger khud port manage karega, isiliye PORT variable yahan check ho raha hai (Bina .env ke)
+const PORT = process.env.PORT || process.env.APP_PORT || process.env.port || 3000; 
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 SERVER IS LIVE AND RUNNING ON PORT: ${PORT}`);
+  
+  // Server successfully listen hone ke BAAD database connect karenge
+  try {
+    connectDaseBase();
+    console.log("🔗 Database connection process initiated...");
+  } catch (dbError) {
+    console.error("❌ Database connection failed on startup:", dbError.message);
+  }
 });
