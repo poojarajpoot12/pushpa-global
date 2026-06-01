@@ -27,10 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ==========================================
-// 3. DATABASE CONNECTION
-// ==========================================
-connectDaseBase();
+
 
 // ==========================================
 // 4. ROUTES
@@ -67,10 +64,12 @@ app.use((err, req, res, next) => {
 
 // ==========================================
 // 6. SERVER START
-// ==========================================
-// Hostinger dynamic port assign karta hai, isiliye process.env.PORT zaroori hai
-const PORT = process.env.PORT || 5000; 
+const PORT = process.env.PORT || process.env.port || 3000; 
 
 app.listen(PORT, () => {
   console.log(`🚀 Server fully operational on port ${PORT}`);
+  // ==========================================
+// 3. DATABASE CONNECTION
+// ==========================================
+connectDaseBase();
 });
