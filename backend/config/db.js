@@ -9,16 +9,14 @@ const connectDaseBase = async () => {
       return;
     }
 
-    console.log("Connecting to MongoDB Atlas (Direct Mode)...");
-
-    // Mongoose connection
-    await mongoose.connect(dbURI);
+    console.log("⏳ Connecting to MongoDB Atlas via Direct Shard Mode...");
     
-    console.log("🚀 MongoDB Connected Successfully!");
+    // Connection trigger
+    const conn = await mongoose.connect(dbURI);
+    
+    console.log(`🚀 MongoDB Connected Successfully to: ${conn.connection.host}`);
   } catch (err) {
     console.error("❌ DB Connection Error Detail:", err);
-    // Server ko crash loop se bachane ke liye process.exit(1) hata diya hai
-    // Taaki server chalu rahe aur hume real-error dikhta rahe
   }
 }
 
