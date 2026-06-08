@@ -1,7 +1,7 @@
 // App.js
 import { Routes, Route } from "react-router-dom"; // Router hataya yahan se
 import Header from "../src/components/header.jsx"; 
-// import Chatbot from "./components/Chatbot";
+import Chatbot from "./components/Chatbot";
 import HomePage from "./pages/homepage.js";
 import Regitration from "./pages/registration.js"; 
 import Service from "./pages/service.js";
@@ -41,7 +41,7 @@ function App() {
         </Routes>
       </main>
 
-      {/* <Chatbot /> */}
+      <Chatbot />
       <Footer/>
     </>
   );
